@@ -6,14 +6,16 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
 
     [Header("Jump")]
-    public float minJumpForce = 5f;
-    public float maxJumpForce = 15f;
-    public float chargeRate = 20f;   // how fast power fills per second
+    //public float minJumpForce = 0;
+    //public float maxJumpForce = 1f;
+    public float jumpForce = 1f;
+    public int maxJumpFrames = 25;
 
     private Rigidbody2D rb;
     private float horizontal;
-    private bool isChargingJump;
-    private float jumpPower;
+    private bool isJumping;
+
+    int jumpFrame = 0;
 
     private void Awake()
     {
@@ -31,27 +33,24 @@ public class PlayerMovement : MonoBehaviour
     {
         if (ctx.performed)  // space down
         {
-            isChargingJump = true;
-            jumpPower = minJumpForce;
+            isJumping = true;
         }
         else if (ctx.canceled) // space released
         {
-            isChargingJump = false;
-            rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-        }
-    }
-
-    private void Update()
-    {
-        if (isChargingJump)
-        {
-            jumpPower += chargeRate * Time.deltaTime;
-            jumpPower = Mathf.Clamp(jumpPower, minJumpForce, maxJumpForce);
+            isJumping = false;
+            jumpFrame = 0;
         }
     }
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(horizontal * moveSpeed, rb.linearVelocity.y);
+        if (isJumping && jumpFrame < maxJumpFrames)
+        {
+            jumpFrame++;
+            //float jumpPower = Mathf.Clamp(jumpForce, minJumpForce, maxJumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        }
+        if(horizontal != 0)
+            rb.linearVelocity = new Vector2(moveSpeed * horizontal, rb.linearVelocity.y);
     }
 }
