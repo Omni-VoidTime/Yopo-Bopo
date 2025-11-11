@@ -11,10 +11,12 @@ public class PlayerMovement : MonoBehaviour
     //public float maxJumpForce = 1f;
     public float jumpForce = 1f;
     public int maxJumpFrames = 25;
+    public int maxJumps = 2;
 
     private Rigidbody2D rb;
     private float horizontal;
     private bool isJumping;
+    private int jumpCount = 0;
 
     public bool touchingFloor = false;
     public bool touchingRightWall = false;
@@ -38,12 +40,25 @@ public class PlayerMovement : MonoBehaviour
     // called from input action (performed on press, canceled on release)
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        //Debug.Log("jump");
-        if (ctx.performed && touchingFloor)  // space down and can jump
+        // Pressed
+        if (ctx.performed)
         {
-            isJumping = true;
+            // Jump if grounded or if we have remaining jumps
+            if (touchingFloor || jumpCount < maxJumps)
+            {
+                isJumping = true;
+
+                // Reset jump frame so variable height works
+                jumpFrame = 0;
+
+                // Immediately apply jump force on press
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+
+                jumpCount++;
+            }
         }
-        else if (ctx.canceled) // space released
+        // Released
+        else if (ctx.canceled)
         {
             isJumping = false;
             jumpFrame = 0;
@@ -95,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
             if (y < x && y < -x)
             {
                 touchingFloor = true;
+                jumpCount = 0;
             }
             else if (y > x && y < -x)
             {
