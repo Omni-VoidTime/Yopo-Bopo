@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class SpikesBehave : MonoBehaviour
 {
-private GameObject player;
+public GameObject player;
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
-    private void OnTriggerEnter2D(Collider2D other) {
-        int max_hp = PlayerStats.health;
-        if (other.gameObject.CompareTag("Player"))
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        int max_hp = PlayerStats.maxHealth;
+        if (collision.gameObject == player)
         {
             Debug.Log("Hit");
             if (PlayerStats.health > 0)

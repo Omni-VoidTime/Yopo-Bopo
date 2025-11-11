@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     // called from input action (performed on press, canceled on release)
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        Debug.Log("jump");
+        //Debug.Log("jump");
         if (ctx.performed && touchingFloor)  // space down and can jump
         {
             isJumping = true;

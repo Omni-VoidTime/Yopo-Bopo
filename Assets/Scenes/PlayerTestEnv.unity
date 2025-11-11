@@ -715,6 +715,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   followObject: {fileID: 3694047329541006380}
+--- !u!1 &1665759825 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7320364099674164150, guid: 6e8c7aba7765744748d653b96cc46456, type: 3}
+  m_PrefabInstance: {fileID: 5196950485467080994}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1665759828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665759825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 989ff37eed87f4dc0ae0a71205691c2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpikesBehave
+  player: {fileID: 0}
 --- !u!1 &3694047329541006380 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1310325300228801036, guid: 9588190ee36e4ac4c9e2bf8f4e732e73, type: 3}
@@ -863,7 +881,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7320364099674164150, guid: 6e8c7aba7765744748d653b96cc46456, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1665759828}
   m_SourcePrefab: {fileID: 100100000, guid: 6e8c7aba7765744748d653b96cc46456, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
