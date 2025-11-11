@@ -22,10 +22,10 @@ public class PlayerMovement : MonoBehaviour
     
     //for doublejump
     private int jumpCount = 0;
-    public int maxJumps = 2;
+    public int maxJumps = 1;
 
     //Wall Jump variables
-    public bool canWallJump = true; 
+    public bool canWallJump = false; 
     // horizontal force away from wall
     public float wallJumpForceX = 5f; 
     // vertical force upward
