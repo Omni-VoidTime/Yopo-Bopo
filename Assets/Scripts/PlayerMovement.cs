@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,18 +6,33 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
+    public float speedModifier = 2f;
+    private float CurrentMoveSpeed => moveSpeed + speedModifier;
 
     [Header("Jump")]
     //public float minJumpForce = 0;
     //public float maxJumpForce = 1f;
     public float jumpForce = 1f;
     public int maxJumpFrames = 25;
-    public int maxJumps = 2;
+
 
     private Rigidbody2D rb;
     private float horizontal;
     private bool isJumping;
+    
+    //for doublejump
     private int jumpCount = 0;
+    public int maxJumps = 2;
+
+    //Wall Jump variables
+    public bool canWallJump = true; 
+    // horizontal force away from wall
+    public float wallJumpForceX = 5f; 
+    // vertical force upward
+    public float wallJumpForceY = 5f; 
+    public float wallJumpLockTime = 0.2f;
+    private bool canMove = true;
+
 
     public bool touchingFloor = false;
     public bool touchingRightWall = false;
@@ -40,29 +56,62 @@ public class PlayerMovement : MonoBehaviour
     // called from input action (performed on press, canceled on release)
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        // Pressed
         if (ctx.performed)
         {
-            // Jump if grounded or if we have remaining jumps
+            // --- Normal Jump or Double Jump ---
             if (touchingFloor || jumpCount < maxJumps)
             {
-                isJumping = true;
-
-                // Reset jump frame so variable height works
-                jumpFrame = 0;
-
-                // Immediately apply jump force on press
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-
-                jumpCount++;
+                PerformJump();
+            }
+            // --- Wall Jump ---
+            else if (canWallJump && (touchingLeftWall || touchingRightWall))
+            {
+                PerformWallJump();
             }
         }
-        // Released
         else if (ctx.canceled)
         {
             isJumping = false;
             jumpFrame = 0;
         }
+    }
+
+    private void PerformJump()
+    {
+        isJumping = true;
+        jumpFrame = 0;
+
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        jumpCount++;
+    }
+
+    private void PerformWallJump()
+    {
+        if (!canWallJump) return;
+
+        isJumping = true;
+        jumpFrame = 0;
+
+        // Zero velocity for consistent jumps
+        rb.linearVelocity = Vector2.zero;
+
+        // Determine direction and push off
+        float wallDir = touchingLeftWall ? 1 : -1;
+        rb.linearVelocity = new Vector2(wallJumpForceX * wallDir, wallJumpForceY);
+
+        // counts as first jump
+        jumpCount = 1;  
+
+        //  temporary movement lock
+        StartCoroutine(WallJumpPushOffDelay()); 
+    }
+
+    //delay so wall jump is smooth
+    private IEnumerator WallJumpPushOffDelay()
+    {
+        canMove = false;
+        yield return new WaitForSeconds(wallJumpLockTime);
+        canMove = true;
     }
 
     private void FixedUpdate()
@@ -81,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            rb.linearVelocity = new Vector2(moveSpeed * horizontal, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(CurrentMoveSpeed * horizontal, rb.linearVelocity.y);
         }
     }
 
