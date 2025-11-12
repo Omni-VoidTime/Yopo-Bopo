@@ -7,18 +7,19 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float speedModifier = 2f;
-    private float CurrentMoveSpeed => moveSpeed + speedModifier;
+    private float CurrentMoveSpeed => moveSpeed * speedModifier;
 
     [Header("Jump")]
     //public float minJumpForce = 0;
     //public float maxJumpForce = 1f;
     public float jumpForce = 1f;
     public int maxJumpFrames = 25;
+    public Vector2 jumpOrigin;
 
 
     private Rigidbody2D rb;
     private float horizontal;
-    private bool isJumping;
+    public bool isJumping;
     
     //for doublejump
     private int jumpCount = 0;
@@ -58,6 +59,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (ctx.performed)
         {
+            //set jump origin if on ground.
+            if(touchingFloor)
+            {
+                jumpOrigin =  this.transform.position;
+            }
             // --- Normal Jump or Double Jump ---
             if (touchingFloor || jumpCount < maxJumps)
             {
@@ -80,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isJumping = true;
         jumpFrame = 0;
+        
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         jumpCount++;
@@ -153,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector2 relativeLocation = contact.point - (Vector2)transform.position;
             //Debug.Log(relativeLocation.ToString());
-            float x = relativeLocation.x;
+            float x = relativeLocation.x * 2;
             float y = relativeLocation.y;
             //see where surface is relative to player
             if (y < x && y < -x)

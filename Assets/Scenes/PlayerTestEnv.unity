@@ -1013,7 +1013,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 9.09
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1119,6 +1119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpikesBehave
   player: {fileID: 0}
+  invulnerabilityTime: 1
 --- !u!1 &1792645069
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,7 +1451,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2991470000795888694, guid: 6e8c7aba7765744748d653b96cc46456, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.23
+      value: 9.84
       objectReference: {fileID: 0}
     - target: {fileID: 2991470000795888694, guid: 6e8c7aba7765744748d653b96cc46456, type: 3}
       propertyPath: m_LocalPosition.y
