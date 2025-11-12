@@ -14,11 +14,12 @@ public class PlayerMovement : MonoBehaviour
     //public float maxJumpForce = 1f;
     public float jumpForce = 1f;
     public int maxJumpFrames = 25;
+    public Vector2 jumpOrigin;
 
 
     private Rigidbody2D rb;
     private float horizontal;
-    private bool isJumping;
+    public bool isJumping;
     
     //for doublejump
     private int jumpCount = 0;
@@ -58,6 +59,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (ctx.performed)
         {
+            //set jump origin if on ground.
+            if(touchingFloor)
+            {
+                jumpOrigin =  this.transform.position;
+            }
             // --- Normal Jump or Double Jump ---
             if (touchingFloor || jumpCount < maxJumps)
             {
@@ -80,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isJumping = true;
         jumpFrame = 0;
+        
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         jumpCount++;
