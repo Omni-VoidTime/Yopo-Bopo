@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     //public float maxJumpForce = 1f;
     public float jumpForce = 1f;
     public int maxJumpFrames = 25;
+    public Vector2 jumpOrigin;
 
 
     private Rigidbody2D rb;
@@ -80,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isJumping = true;
         jumpFrame = 0;
+        jumpOrigin =  this.transform.position;
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         jumpCount++;

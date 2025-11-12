@@ -16,7 +16,7 @@ public GameObject player;
             if (PlayerStats.health > 0)
             {
                 PlayerStats.health = PlayerStats.health - 1;
-                player.transform.position = new Vector2(transform.position.x - 5, 0);
+                player.transform.position = player.GetComponent<PlayerMovement>().jumpOrigin;
                 Debug.Log("Taken Damage");
             }
             else
