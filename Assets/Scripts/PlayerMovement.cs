@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float speedModifier = 2f;
-    private float CurrentMoveSpeed => moveSpeed + speedModifier;
+    private float CurrentMoveSpeed => moveSpeed * speedModifier;
 
     [Header("Jump")]
     //public float minJumpForce = 0;
@@ -153,7 +153,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector2 relativeLocation = contact.point - (Vector2)transform.position;
             //Debug.Log(relativeLocation.ToString());
-            float x = relativeLocation.x;
+            float x = relativeLocation.x * 2;
             float y = relativeLocation.y;
             //see where surface is relative to player
             if (y < x && y < -x)
