@@ -127,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpFrame++;
             //float jumpPower = Mathf.Clamp(jumpForce, minJumpForce, maxJumpForce);
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(jumpForce,rb.linearVelocityY));
         }
         //set movement to zero if colliding with that wall
         //(this prevents players sticking to walls when they shouldn't be able to)
@@ -163,7 +163,7 @@ public class PlayerMovement : MonoBehaviour
             float x = relativeLocation.x * 2;
             float y = relativeLocation.y;
             //see where surface is relative to player
-            if (y < x && y < -x)
+            if (y < x && y < -x && collision.gameObject.tag == "Ground")
             {
                 touchingFloor = true;
                 jumpCount = 0;
