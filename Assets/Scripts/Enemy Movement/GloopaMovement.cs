@@ -63,9 +63,4 @@ public class GloopaMovement : MonoBehaviour
             }
         }
     }
-
-    private void OnCollisionExit2D(Collision2D col)
-    {
-        
-    }
 }
