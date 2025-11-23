@@ -71,7 +71,7 @@ public class NPCBehavior : MonoBehaviour
         {
             currentText = line.Substring(0, i);
             dialogueTextBox.SetText(currentText);
-            yield return new WaitForSeconds(.05f);
+            yield return new WaitForSeconds(.03f); //Change number to change text speed
         }
         isStillTalking= false;
     }
