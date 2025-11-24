@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6826313669477075410}
   - component: {fileID: 3170302199984772801}
   - component: {fileID: 5584864117320462760}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: pilobu placeholder_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}

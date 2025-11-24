@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 150763697322567131}
   - component: {fileID: 1906293849245965788}
   - component: {fileID: 6309120799003232679}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: floaty-bob placeholder_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,8 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2b82c2a2cd3f26498cc166bf3f98923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloatyBobMovement
-  minAmplitude: 0.5
-  maxAmplitude: 1.5
-  minFrequency: 1
+  minAmplitude: 1
+  maxAmplitude: 2
+  minFrequency: 1.5
   maxFrequency: 2.5
   randomizePhase: 1

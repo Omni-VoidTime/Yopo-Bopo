@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7685464048476081992}
   - component: {fileID: 6927038529211864934}
   - component: {fileID: 8617737636617966220}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: gloopa placeholder_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
