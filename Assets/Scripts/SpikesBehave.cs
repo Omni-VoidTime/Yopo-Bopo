@@ -1,53 +1,74 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SpikesBehave : MonoBehaviour
 {
-public GameObject player;
-public float invulnerabilityTime = 1.0f; // time (in seconds) before player can be hurt again
+    public GameObject player;
+    public float invulnerabilityTime = 1.0f; // seconds
 
-// prevents repeated damage hits
-private float lastHitTime = -999f;
-    
-private void Start()
+    // static so all spike instances share the same data
+    private static Dictionary<int, int> lastHitFrameByPlayer = new Dictionary<int, int>();
+
+    private static Dictionary<int, float> lastHitTimeByPlayer = new Dictionary<int, float>();
+
+    private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        int max_hp = PlayerStats.maxHealth;
-        if (collision.gameObject == player)
-        {
-            if (Time.time - lastHitTime < invulnerabilityTime)
+        if (collision.gameObject != player)
             return;
 
-            // immediately mark time of hit
-            lastHitTime = Time.time; 
+        int playerId = collision.gameObject.GetInstanceID();
 
-            Debug.Log("Hit");
-            if (PlayerStats.health > 0)
+        // Same-frame guard across all spikes
+        int lastFrame = -1;
+        lastHitFrameByPlayer.TryGetValue(playerId, out lastFrame);
+        if (Time.frameCount == lastFrame)
+            return; // some spike already hit this player this frame
+
+        // Time-based invulnerability across all spikes
+        float lastTime = -999f;
+        lastHitTimeByPlayer.TryGetValue(playerId, out lastTime);
+        if (Time.time - lastTime < invulnerabilityTime)
+            return;
+
+        // Record hits (shared)
+        lastHitFrameByPlayer[playerId] = Time.frameCount;
+        lastHitTimeByPlayer[playerId] = Time.time;
+
+        Debug.Log("Hit");
+
+        int max_hp = PlayerStats.maxHealth;
+
+        if (PlayerStats.health > 0)
+        {
+            PlayerStats.health = PlayerStats.health - 1;
+
+            if (player.GetComponent<PlayerMovement>().isJumping)
             {
-                PlayerStats.health = PlayerStats.health - 1;
-                if(player.GetComponent<PlayerMovement>().isJumping)
-                {
-                    player.transform.position = player.GetComponent<PlayerMovement>().jumpOrigin;
-                }else
-                {
-                    float direction = Mathf.Sign(player.transform.position.x - collision.transform.position.x);
-                    player.transform.position = new Vector2(player.transform.position.x + (2f * direction), player.transform.position.y);
-                }
-
-
-                Debug.Log("Taken Damage");
-                StartCoroutine(FlashInvulnerability());
-               
+                player.transform.position = player.GetComponent<PlayerMovement>().jumpOrigin;
             }
             else
             {
-                PlayerStats.health = max_hp;
-                player.transform.position = Vector2.zero;
-                Debug.Log("Sent to Spawn");
+                float direction = Mathf.Sign(player.transform.position.x - collision.transform.position.x);
+                player.transform.position = new Vector2(
+                    player.transform.position.x + (2f * direction),
+                    player.transform.position.y
+                );
             }
+
+            Debug.Log("Taken Damage");
+            StartCoroutine(FlashInvulnerability());
+        }
+        else
+        {
+            PlayerStats.health = max_hp;
+            player.transform.position = Vector2.zero;
+            Debug.Log("Sent to Spawn");
         }
     }
 
