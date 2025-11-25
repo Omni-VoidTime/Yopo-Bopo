@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 150763697322567131}
   - component: {fileID: 1906293849245965788}
   - component: {fileID: 6309120799003232679}
+  - component: {fileID: -2331420524186987879}
   m_Layer: 3
   m_Name: floaty-bob placeholder_prefab
   m_TagString: Untagged
@@ -174,3 +175,18 @@ MonoBehaviour:
   minFrequency: 1.5
   maxFrequency: 2.5
   randomizePhase: 1
+--- !u!114 &-2331420524186987879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3664695815197134088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb67d9f666dbe264f87d3fbf2b37d849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
+  damageAmount: 1
+  invulnerabilityTime: 1
+  knockbackForce: 2

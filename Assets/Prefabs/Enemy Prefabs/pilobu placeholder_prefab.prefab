@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6826313669477075410}
   - component: {fileID: 3170302199984772801}
   - component: {fileID: 5584864117320462760}
+  - component: {fileID: -7003546042071433438}
   m_Layer: 3
   m_Name: pilobu placeholder_prefab
   m_TagString: Untagged
@@ -173,3 +174,18 @@ MonoBehaviour:
   spinSpeed: 180
   moveSpeed: 10
   movingRight: 1
+--- !u!114 &-7003546042071433438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9006971151565721155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb67d9f666dbe264f87d3fbf2b37d849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
+  damageAmount: 1
+  invulnerabilityTime: 1
+  knockbackForce: 2

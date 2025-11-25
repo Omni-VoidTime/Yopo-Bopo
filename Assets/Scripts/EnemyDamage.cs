@@ -22,7 +22,7 @@ public class EnemyDamage : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject == player) return;
+        if (!collision.gameObject.CompareTag("Player")) return;
 
         int playerID = collision.gameObject.GetInstanceID();
 
@@ -51,6 +51,10 @@ public class EnemyDamage : MonoBehaviour
 
         if (PlayerStats.health <= 0)
         {
+            PlayerStats playerStats = player.GetComponent<PlayerStats>();
+            int max_hp = PlayerStats.maxHealth;
+            PlayerStats.health = max_hp;
+            player.transform.position = Vector2.zero;
             Debug.Log("Player Dead");
         }
  

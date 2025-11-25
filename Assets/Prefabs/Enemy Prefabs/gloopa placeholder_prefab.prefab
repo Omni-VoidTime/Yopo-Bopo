@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7685464048476081992}
   - component: {fileID: 6927038529211864934}
   - component: {fileID: 8617737636617966220}
+  - component: {fileID: 342487224316374226}
   m_Layer: 3
   m_Name: gloopa placeholder_prefab
   m_TagString: Untagged
@@ -171,3 +172,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 1}
   m_Direction: 0
+--- !u!114 &342487224316374226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643594270195208934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb67d9f666dbe264f87d3fbf2b37d849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
+  damageAmount: 1
+  invulnerabilityTime: 1
+  knockbackForce: 2
