@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 3758220552551730906}
   - component: {fileID: -5544996442786171547}
   m_Layer: 3
-  m_Name: angy-bob placeholder_prefab
+  m_Name: Angy-bob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

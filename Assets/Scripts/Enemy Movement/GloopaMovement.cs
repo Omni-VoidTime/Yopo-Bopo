@@ -45,7 +45,11 @@ public class GloopaMovement : MonoBehaviour
             Vector2 relativeLocation = contact.point - (Vector2)transform.position;
             float x = relativeLocation.x * 2;
             float y = relativeLocation.y;
-
+            //make sure the collision is the ground
+            if (collision.gameObject.tag != "Ground")
+            {
+                return;
+            }
             // FLOOR
             if (y < x && y < -x)
             {

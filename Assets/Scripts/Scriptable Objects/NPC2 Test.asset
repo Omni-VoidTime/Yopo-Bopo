@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: NPC2 Test
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue
   NPCDialogue:
-  - You stink
-  - Get out of here stinky
-  - Stinking like commoner stink
+  - Hey, look at that!
+  - Our dialogue system works!
+  - Yippee!
   - 
   - 
   NPCHatDialogue:

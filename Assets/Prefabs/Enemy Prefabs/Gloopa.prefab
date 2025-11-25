@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3664695815197134088
+--- !u!1 &643594270195208934
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1481649194130511423}
-  - component: {fileID: 7474359768978773161}
-  - component: {fileID: 150763697322567131}
-  - component: {fileID: 1906293849245965788}
-  - component: {fileID: 6309120799003232679}
-  - component: {fileID: -2331420524186987879}
+  - component: {fileID: 5442659757388774612}
+  - component: {fileID: 8963974630324560742}
+  - component: {fileID: 7685464048476081992}
+  - component: {fileID: 6927038529211864934}
+  - component: {fileID: 8617737636617966220}
+  - component: {fileID: 342487224316374226}
   m_Layer: 3
-  m_Name: floaty-bob placeholder_prefab
+  m_Name: Gloopa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1481649194130511423
+--- !u!4 &5442659757388774612
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3664695815197134088}
+  m_GameObject: {fileID: 643594270195208934}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -28.08088, y: -35.83735, z: 0}
+  m_LocalPosition: {x: -6.9770126, y: -56.655384, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7474359768978773161
+--- !u!212 &8963974630324560742
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3664695815197134088}
+  m_GameObject: {fileID: 643594270195208934}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -83,33 +83,47 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 91f83d3672aa4724fbd1879bb305fadd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c788e5f4581efb44bebd46e08924b7e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 0.99}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &150763697322567131
+--- !u!114 &7685464048476081992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643594270195208934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f30349a8ce8c2144b61b332ff1c3f31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GloopaMovement
+  moveSpeed: 2
+  movingRight: 1
+--- !u!50 &6927038529211864934
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3664695815197134088}
-  m_BodyType: 1
+  m_GameObject: {fileID: 643594270195208934}
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 5
   m_Material: {fileID: 6200000, guid: 102d3655e26f3e746b76da8f16437d25, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -120,14 +134,14 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!70 &1906293849245965788
+  m_Constraints: 4
+--- !u!70 &8617737636617966220
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3664695815197134088}
+  m_GameObject: {fileID: 643594270195208934}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -155,33 +169,16 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.95, y: 0.95}
+  m_Offset: {x: 0.03, y: 0}
+  m_Size: {x: 0.7, y: 1.39}
   m_Direction: 0
---- !u!114 &6309120799003232679
+--- !u!114 &342487224316374226
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3664695815197134088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2b82c2a2cd3f26498cc166bf3f98923, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FloatyBobMovement
-  minAmplitude: 1
-  maxAmplitude: 2
-  minFrequency: 1.5
-  maxFrequency: 2.5
-  randomizePhase: 1
---- !u!114 &-2331420524186987879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3664695815197134088}
+  m_GameObject: {fileID: 643594270195208934}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb67d9f666dbe264f87d3fbf2b37d849, type: 3}
