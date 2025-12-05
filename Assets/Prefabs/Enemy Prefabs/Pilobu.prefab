@@ -120,7 +120,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &3170302199984772801
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -170,8 +170,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd431f4acaea304cbcd7f66324b7de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PilobuMovement
+  debugStuff: 0
+  touchingLeftWall: 0
+  touchingRightWall: 0
+  touchingFloor: 0
   model: {fileID: 2106600971272951422}
-  spinSpeed: 180
+  spinSpeed: 22.5
   moveSpeed: 10
   movingRight: 1
 --- !u!114 &-7003546042071433438
@@ -188,4 +192,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
   damageAmount: 1
   invulnerabilityTime: 1
-  knockbackForce: 2
+  knockbackForce: 0

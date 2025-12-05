@@ -201,7 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
   damageAmount: 1
   invulnerabilityTime: 1
-  knockbackForce: 2
+  knockbackForce: 0
 --- !u!70 &-5544996442786171547
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

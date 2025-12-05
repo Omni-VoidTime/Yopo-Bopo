@@ -106,6 +106,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f30349a8ce8c2144b61b332ff1c3f31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GloopaMovement
+  debugStuff: 0
+  touchingLeftWall: 0
+  touchingRightWall: 0
+  touchingFloor: 0
   moveSpeed: 2
   movingRight: 1
 --- !u!50 &6927038529211864934
@@ -186,4 +190,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
   damageAmount: 1
   invulnerabilityTime: 1
-  knockbackForce: 2
+  knockbackForce: 0

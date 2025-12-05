@@ -8,7 +8,7 @@ public class EnemyDamage : MonoBehaviour
     [Header("Damage Settings")]
     public int damageAmount = 1;
     public float invulnerabilityTime = 1f;
-    public float knockbackForce = 2f;
+    public float knockbackForce = 0;
 
     private GameObject player;
 

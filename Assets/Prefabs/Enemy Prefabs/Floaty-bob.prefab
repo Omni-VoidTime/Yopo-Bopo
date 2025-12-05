@@ -189,4 +189,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
   damageAmount: 1
   invulnerabilityTime: 1
-  knockbackForce: 2
+  knockbackForce: 0
