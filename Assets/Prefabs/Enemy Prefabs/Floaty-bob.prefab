@@ -170,10 +170,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2b82c2a2cd3f26498cc166bf3f98923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloatyBobMovement
-  minAmplitude: 1
-  maxAmplitude: 2
-  minFrequency: 1.5
-  maxFrequency: 2.5
+  minAmplitude: 0.25
+  maxAmplitude: 0.25
+  minFrequency: 3
+  maxFrequency: 3
   randomizePhase: 1
 --- !u!114 &-2331420524186987879
 MonoBehaviour:
