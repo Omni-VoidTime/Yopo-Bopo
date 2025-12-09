@@ -86,7 +86,7 @@ public class SpikesBehave : MonoBehaviour
         if (sprite == null)
             yield break;
 
-        Color original = sprite.color;
+        Color original = new Color32(255,255,255,255);
 
         float elapsed = 0f;
         while (elapsed < invulnerabilityTime)

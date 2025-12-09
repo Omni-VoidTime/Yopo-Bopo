@@ -155,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
         //apply extra x force
         transform.position = new Vector3(transform.position.x + extraXVelocity, transform.position.y, transform.position.z) ;
         extraXVelocity = extraXVelocity * (1 - extraXDrag);
-        Debug.Log(extraXVelocity);
+        //Debug.Log(extraXVelocity);
         //don't update movement if sliding on ice.
         //this stops the player from changing direction while on ice
         if (touchingIce) return;
