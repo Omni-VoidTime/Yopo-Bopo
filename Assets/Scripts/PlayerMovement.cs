@@ -13,13 +13,13 @@ public class PlayerMovement : MonoBehaviour
     //public float minJumpForce = 0;
     //public float maxJumpForce = 1f;
     public float jumpForce = 1f;
-    public int maxJumpFrames = 25;
-    int jumpSlowdownFrame = 25; //at this frame, the jump speed halves, to represent the propeller kicking in
+    public int maxJumpFrames = 15;
+    int jumpSlowdownFrame = 15; //at this frame, the jump speed halves, to represent the propeller kicking in
     public Vector2 jumpOrigin;
 
 
     private Rigidbody2D rb;
-    private float horizontal;
+    public float horizontal;
     public bool isJumping;
     public bool isJumpingOutOfWater;
 
@@ -40,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
     public float wallJumpLockTime = 0.2f;
     private bool canMove = true;
 
+    //for teleporting when hitting spikes
+    public Vector2 lastSafePosition = new Vector2(0, 0);
 
     public bool touchingFloor = false;
     public bool touchingRightWall = false;
@@ -216,6 +218,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 touchingFloor = true;
                 jumpCount = 0;
+                //set teleport position for spikes
+                lastSafePosition = transform.position;
+                
             }
             else if (y > x && y < -x)
             {

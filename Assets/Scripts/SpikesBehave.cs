@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class SpikesBehave : MonoBehaviour
 {
-    public GameObject player;
     public float invulnerabilityTime = 1.0f; // seconds
 
     // static so all spike instances share the same data
@@ -14,14 +13,13 @@ public class SpikesBehave : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject != player)
+        if (other.gameObject.tag != "Player")
             return;
-
         int playerId = other.gameObject.GetInstanceID();
 
         // Same-frame guard across all spikes
@@ -48,39 +46,39 @@ public class SpikesBehave : MonoBehaviour
         {
             PlayerStats.health -= 1;
 
-            Vector2 teleportPos;
 
             // Teleport player safely
-            var playerMovement = player.GetComponent<PlayerMovement>();
-            if (playerMovement != null && playerMovement.isJumping)
+            var playerMovement = other.GetComponent<PlayerMovement>();
+            Vector2 teleportPos = playerMovement.lastSafePosition;
+            /*if (playerMovement != null && playerMovement.isJumping)
             {
                 // Slightly above jump origin to avoid sticking
-                teleportPos = playerMovement.jumpOrigin + Vector2.up * 0.1f;
+                teleportPos = playerMovement.lastSafePosition;// playerMovement.jumpOrigin + Vector2.up * 0.1f;
             }
             else
             {
                 // Push to the side and slightly up
-                float direction = Mathf.Sign(player.transform.position.x - transform.position.x);
+                /*float direction = Mathf.Sign(player.transform.position.x - transform.position.x);
                 teleportPos = new Vector2(player.transform.position.x + 2f * direction,
                                           player.transform.position.y + 0.1f);
-            }
+            }*/
 
-            player.transform.position = teleportPos;
+            other.transform.position = teleportPos;
 
             Debug.Log("Taken Damage");
 
-            StartCoroutine(FlashInvulnerability());
+            StartCoroutine(FlashInvulnerability(other.gameObject));
         }
         else
         {
             // Player died: reset health and position
             PlayerStats.health = max_hp;
-            player.transform.position = Vector2.zero;
+            other.transform.position = Vector2.zero;
             Debug.Log("Sent to Spawn");
         }
     }
 
-    private IEnumerator FlashInvulnerability()
+    private IEnumerator FlashInvulnerability(GameObject player)
     {
         var sprite = player.GetComponent<SpriteRenderer>();
         if (sprite == null)
