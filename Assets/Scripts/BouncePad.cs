@@ -46,7 +46,12 @@ public class BouncePad : MonoBehaviour
         {
             yVel = forceVector.y;
         }
-        body.linearVelocity = new Vector2(xVel,yVel);
+        body.linearVelocity = new Vector2(0,yVel);
+        PlayerMovement player = body.GetComponent<PlayerMovement>();
+        if(player != null)
+        {
+            player.extraXVelocity = xVel;
+        }
         //body.AddForce(forceVector);
     }
 }

@@ -25,7 +25,7 @@ public class RoomLoader : MonoBehaviour
     {
         if (collision.collider == roomLoadCollider)
         {
-            Debug.Log("hi");
+            //Debug.Log("hi");
             roomObject.SetActive(true);
         }
     }
@@ -34,7 +34,7 @@ public class RoomLoader : MonoBehaviour
     {
         if (collision.collider == roomLoadCollider)
         {
-            Debug.Log("bye");
+            //Debug.Log("bye");
             roomObject.SetActive(false);
         }
     }

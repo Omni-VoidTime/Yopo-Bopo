@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     //public float maxJumpForce = 1f;
     public float jumpForce = 1f;
     public int maxJumpFrames = 25;
+    int jumpSlowdownFrame = 25; //at this frame, the jump speed halves, to represent the propeller kicking in
     public Vector2 jumpOrigin;
 
 
@@ -22,6 +23,10 @@ public class PlayerMovement : MonoBehaviour
     public bool isJumping;
     public bool isJumpingOutOfWater;
 
+    //for left/right forces outside regular movement
+    public float extraXVelocity = 0;
+    float extraXDrag = 0.1f; //percentage of velocity removed per fixedUpdate
+
     //for doublejump
     private int jumpCount = 0;
     public int maxJumps = 1;
@@ -29,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     //Wall Jump variables
     public bool canWallJump = false;
     // horizontal force away from wall
-    public float wallJumpForceX = 5f;
+    float wallJumpForceX = 0.5f;
     // vertical force upward
     public float wallJumpForceY = 5f;
     public float wallJumpLockTime = 0.2f;
@@ -44,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
     public bool touchingIce = false;
 
     int jumpFrame = 0;
+    bool justWallJumped = false;
 
     private void Awake()
     {
@@ -53,7 +59,10 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext ctx)
     {
         var v = ctx.ReadValue<Vector2>();
-        horizontal = v.x;           // only x matters now
+        if (justWallJumped)
+            horizontal = 0;           // only x matters now
+        else
+            horizontal = v.x;
 
     }
 
@@ -101,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
         if (!canWallJump) return;
 
         isJumping = true;
+        justWallJumped = true;
         jumpFrame = 0;
 
         // Zero velocity for consistent jumps
@@ -108,7 +118,8 @@ public class PlayerMovement : MonoBehaviour
 
         // Determine direction and push off
         float wallDir = touchingLeftWall ? 1 : -1;
-        rb.linearVelocity = new Vector2(wallJumpForceX * wallDir, wallJumpForceY);
+        extraXVelocity += wallDir * wallJumpForceX;
+        rb.linearVelocity = new Vector2(0, wallJumpForceY);
 
         // counts as first jump
         jumpCount = 1;
@@ -131,9 +142,9 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpFrame++;
             //float jumpPower = Mathf.Clamp(jumpForce, minJumpForce, maxJumpForce);
-            if (isJumpingOutOfWater)
+            if (isJumpingOutOfWater || jumpFrame >= jumpSlowdownFrame)
             {
-                //velocity halved when jumping out of water
+                //velocity halved when jumping out of water or using propeller
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(jumpForce / 2, rb.linearVelocityY));
             }
             else
@@ -141,6 +152,10 @@ public class PlayerMovement : MonoBehaviour
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(jumpForce, rb.linearVelocityY));
             }
         }
+        //apply extra x force
+        transform.position = new Vector3(transform.position.x + extraXVelocity, transform.position.y, transform.position.z) ;
+        extraXVelocity = extraXVelocity * (1 - extraXDrag);
+        Debug.Log(extraXVelocity);
         //don't update movement if sliding on ice.
         //this stops the player from changing direction while on ice
         if (touchingIce) return;
@@ -149,6 +164,10 @@ public class PlayerMovement : MonoBehaviour
         if ((horizontal > 0 && touchingRightWall) || (horizontal < 0 && touchingLeftWall))
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            if (!justWallJumped)
+            {
+                extraXVelocity = 0; //also set this to zero to stop any weird jittery bouncing
+            }
         }
         else if(touchingWater) //movement halved in water
         {
@@ -158,6 +177,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(CurrentMoveSpeed * horizontal, rb.linearVelocity.y);
         }
+        justWallJumped = false;
     }
 
     private void OnCollisionStay2D(Collision2D collision)
