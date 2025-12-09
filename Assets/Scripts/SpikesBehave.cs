@@ -42,7 +42,7 @@ public class SpikesBehave : MonoBehaviour
 
         int max_hp = PlayerStats.maxHealth;
 
-        if (PlayerStats.health > 0)
+        if (PlayerStats.health > 1)
         {
             PlayerStats.health -= 1;
 
@@ -80,22 +80,31 @@ public class SpikesBehave : MonoBehaviour
 
     private IEnumerator FlashInvulnerability(GameObject player)
     {
-        var sprite = player.GetComponent<SpriteRenderer>();
-        if (sprite == null)
-            yield break;
+        Transform images = player.transform.GetChild(0);
+        SpriteRenderer[] sprites = images.GetComponentsInChildren<SpriteRenderer>();
+        
 
-        Color original = new Color32(255,255,255,255);
+            Color original = new Color32(255, 255, 255, 255);
 
-        float elapsed = 0f;
-        while (elapsed < invulnerabilityTime)
-        {
-            sprite.color = new Color(original.r, original.g, original.b, 0.5f);
-            yield return new WaitForSeconds(0.1f);
-            sprite.color = original;
-            yield return new WaitForSeconds(0.1f);
-            elapsed += 0.2f;
-        }
-
-        sprite.color = original;
+            float elapsed = 0f;
+            while (elapsed < invulnerabilityTime)
+            {
+                foreach (SpriteRenderer sprite in sprites)
+                {
+                    sprite.color = new Color(original.r, original.g, original.b, 0.5f);
+                }
+                yield return new WaitForSeconds(0.1f);
+                foreach (SpriteRenderer sprite in sprites)
+                {
+                    sprite.color = original;
+                }
+                yield return new WaitForSeconds(0.1f);
+                elapsed += 0.2f;
+            }
+            foreach (SpriteRenderer sprite in sprites)
+            {
+                sprite.color = original;
+            }
+        
     }
 }
